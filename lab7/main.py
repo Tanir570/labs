@@ -8,26 +8,28 @@ mouse = pygame.image.load('images/mainclock.png')
 leftarm = pygame.image.load('images/leftarm.png')
 rightarm = pygame.image.load('images/rightarm.png')
 mouse = pygame.transform.scale(mouse, (500, 400))
-hscalefactor= 0.5
-leftarm = pygame.transform.scale(leftarm, (float(leftarm.get_width()*hscalefactor), float(leftarm.get_height()*hscalefactor)))
-rightarm=pygame.transform.scale(rightarm, (float(rightarm.get_width()*hscalefactor), float(rightarm.get_height()*hscalefactor)))
-done=True
-while  done:
+hscalefactor = 0.5
+leftarm = pygame.transform.scale(leftarm, (int(leftarm.get_width() * hscalefactor), int(leftarm.get_height() * hscalefactor)))
+rightarm = pygame.transform.scale(rightarm, (int(rightarm.get_width() * hscalefactor), int(rightarm.get_height() * hscalefactor)))
+done = True
+
+while done:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            done=False
+            done = False
+
     current_time = datetime.datetime.now()
     minute_angle = -6 * ((current_time.minute + current_time.second / 60) * 6)
-    second_angle = -6 * current_time.second 
-    
+    second_angle = -6 * current_time.second
+
     rlarm = pygame.transform.rotate(leftarm, minute_angle)
     rrarm = pygame.transform.rotate(rightarm, second_angle)
-    done=True
-    screen.blit(mouse, mouse.get_rect(center = screen.get_rect().center))
-    screen.blit(rlarm, rlarm.get_rect(center = screen.get_rect().center))
-    screen.blit(rrarm, rrarm.get_rect(center=screen.get_rect().center))    
-            
+
+    screen.blit(mouse, mouse.get_rect(center=screen.get_rect().center))
+    screen.blit(rlarm, rlarm.get_rect(center=screen.get_rect().center))
+    screen.blit(rrarm, rrarm.get_rect(center=screen.get_rect().center))
+
     pygame.display.flip()
-           
     clock.tick(120)
+
 pygame.quit()
